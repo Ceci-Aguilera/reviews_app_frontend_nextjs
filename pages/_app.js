@@ -1,18 +1,19 @@
 import '../styles/globals.css'
 import { AuthProvider, getUser } from "../context/AuthContext"
+import App from "next/app"
 
-function MyApp({ Component, pageProps, auth }) {
-  <AuthProvider myAuth={auth}>
-    return <Component {...pageProps} />
-  </AuthProvider>
+function MyApp({ Component, pageProps }) {
+ return( <AuthProvider>
+     <Component {...pageProps} />
+  </AuthProvider>);
 }
 
 
-myApp.getInitialProps = async (appContext) => {
-  const appProps = await App.getInitialProps(appContext);
-  const auth = await getUser(appContext.ctx);
-  return { ...appProps, auth: auth}
-}
+// MyApp.getInitialProps = async (appContext) => {
+//   const appProps = await App.getInitialProps(appContext);
+//   const auth = await getUser(appContext.ctx);
+//   return { ...appProps, auth: auth}
+// }
 
 
 
