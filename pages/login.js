@@ -8,7 +8,7 @@ export default function Home() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // await login();
+    await login('someEmail@gmail.com', 'SuperHellow123!');
   };
 
   const handleLogout = async (e) => {
