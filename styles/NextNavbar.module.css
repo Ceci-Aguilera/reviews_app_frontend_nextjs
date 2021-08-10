@@ -52,6 +52,20 @@
 }
 
 
+.navbar__cat_input_group{
+  max-width: 300px;
+  text-align: center;
+  justify-content:center;
+}
+
+.navbar__cat_typehead::clearButton{
+  background-color: red !important;
+}
+
+.navbar__search_cat_button{
+  background-color: white;
+}
+
 
 @media screen and (max-width: 758px) {
   .navbar__brand {
@@ -67,12 +81,19 @@
   }
 }
 
+.navbar__lower_navbar__middle_nav{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 @media screen and (min-width: 758px) {
   .navbar__lower_navbar__div {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-left: 50px;
+    margin-right: 50px;
   }
 
   .navbar__link{

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext } from "react";
 import router from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, createRef } from "react";
 import sty from "../styles/NextNavbar.module.css";
 import gstyle from "../styles/NextGlobal.module.css";
 import {
@@ -12,9 +12,27 @@ import {
   Button,
   Container,
   NavDropdown,
+  InputGroup,
 } from "react-bootstrap";
 
-const NextNavbar = ({ user, logout }) => {
+import "react-bootstrap-typeahead/css/Typeahead.css";
+import {
+  Typeahead,
+  Token,
+  Highlighter,
+  useToken,
+} from "react-bootstrap-typeahead";
+
+const NextNavbar = ({ user, logout, categories }) => {
+  const [current_category, setCurrentCategory] = useState([]);
+  const ref = createRef();
+
+  const currentCategoryHandler = async (e) => {
+    e.preventDefault();
+    console.log(category_options[1]);
+    setCurrentCategory(category_options[1]);
+  };
+
   return (
     <>
       <Navbar
@@ -59,22 +77,31 @@ const NextNavbar = ({ user, logout }) => {
                 </>
               )}
             </Nav>
-            <>
-              <NavDropdown
-                className={`${sty.navbar__nav_dropdown}`}
-                title={<p>C</p>}
-                id="basic-nav-dropdown"
-              >
-                <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">
-                  Something else here
-                </NavDropdown.Item>
-              </NavDropdown>
 
+            <Nav className={sty.navbar__lower_navbar__middle_nav}>
+              <InputGroup
+                size="lg"
+                className={`${sty.navbar__cat_input_group} mb-3`}
+              >
+                <Typeahead
+                  id="basic-typeahead-multiple"
+                  labelKey="title"
+                  onChange={setCurrentCategory}
+                  options={categories}
+                  placeholder="Search a category..."
+                  selected={current_category}
+                  clearButton
+                />
+                <Button
+                  className={`${sty.navbar__search_cat_button}`}
+                  variant="outline-success"
+                >
+                  {"->"}
+                </Button>
+              </InputGroup>
+            </Nav>
+
+            {/* <Nav>
               <Form className={`${sty.navbar__search_tech} d-flex`}>
                 <FormControl
                   type="search"
@@ -93,7 +120,30 @@ const NextNavbar = ({ user, logout }) => {
                   </Button>
                 </Container>
               </Form>
-            </>
+            </Nav> */}
+
+            <Nav className={sty.navbar__lower_navbar__final_nav}>
+              <InputGroup
+                size="lg"
+                className={`${sty.navbar__cat_input_group} mb-3`}
+              >
+                <Typeahead
+                  id="basic-typeahead-multiple"
+                  labelKey="title"
+                  onChange={setCurrentCategory}
+                  options={categories}
+                  placeholder="Search a tech item..."
+                  selected={current_category}
+                  clearButton
+                />
+                <Button
+                  className={`${sty.navbar__search_cat_button}`}
+                  variant="outline-success"
+                >
+                  {"->"}
+                </Button>
+              </InputGroup>
+            </Nav>
           </div>
         </Navbar.Collapse>
       </Navbar>
