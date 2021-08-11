@@ -1,6 +1,16 @@
-.global__background{
-    /* background-color: #57BA98; */
-    background-color: #9fed9a;
-    /* background-color: #83e87c; */
-    /* background-color: #99EEBB; */
-  }
+.global__background {
+  /* background-color: #57BA98; */
+  background-color: #9fed9a;
+  /* background-color: #83e87c; */
+  /* background-color: #99EEBB; */
+}
+
+.global__border {
+  border: 1px solid #d7d8db;
+}
+
+
+.global__font{
+  font-weight: 300 !important;
+  color: #60646e;
+}

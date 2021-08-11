@@ -5,13 +5,70 @@ import styles from "../styles/Home.module.css";
 import { useAuth } from "../context/AuthContext";
 import { useCategories } from "../context/CategoriesContext";
 import NextNavbar from "../components/NextNavbar";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import TechsGrid from "../components/TechsGrid";
+
+const config = {
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
 
 export default function Home() {
   const { auth, user, loading, logout } = useAuth();
 
   const { categories } = useCategories();
 
-  return (categories == undefined)?<></>:(
+  const [techs, setTechs] = useState(null);
+
+  const getAllTechs = async () => {
+    const all_techs_url =
+      process.env.NEXT_PUBLIC_API_DOMAIN + `api/v1/technologies/`;
+
+    await axios
+      .get(all_techs_url, config)
+      .then(async (response) => {
+        const result = await response.data.data['technologies'];
+        setTechs(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(async () => {
+    await getAllTechs();
+  }, []);
+
+  const filterByCategory = async (categori) => {
+    // console.log(category)
+    const category = categori[0]
+    if (
+      category === null ||
+      category === undefined ||
+      !category.title.replace(/\s/g, "").length
+    ) {
+      getAllTechs();
+    } else {
+      const category_filter_url =
+        process.env.NEXT_PUBLIC_API_DOMAIN + `api/v1/category/${category.id}`;
+
+      await axios
+        .get(category_filter_url, config)
+        .then(async (response) => {
+          const result = await response.data.data['technologies'];
+          setTechs(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  return categories == undefined ? (
+    <></>
+  ) : (
     <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
@@ -23,17 +80,20 @@ export default function Home() {
         />
       </Head>
 
-      <NextNavbar user={user} logout={logout} categories={categories} />
+      <NextNavbar
+        user={user}
+        logout={logout}
+        categories={categories}
+        filterByCategory={filterByCategory}
+        techs={techs}
+      />
 
       <main className={styles.main}>
         {loading ? (
           <p>Loading</p>
         ) : (
           <>
-            {user == null ? <p>Null</p> : <p>{user.username}</p>}
-            <Link href="/login">
-              <a style={{ color: "blue" }}>Login</a>
-            </Link>
+            <TechsGrid techs={techs}/>
           </>
         )}
       </main>

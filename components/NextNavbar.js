@@ -2,8 +2,8 @@ import axios from "axios";
 import { createContext } from "react";
 import router from "next/router";
 import { useEffect, useState, createRef } from "react";
+import gst from "../styles/NextGlobal.module.css";
 import sty from "../styles/NextNavbar.module.css";
-import gstyle from "../styles/NextGlobal.module.css";
 import {
   Navbar,
   Nav,
@@ -23,20 +23,25 @@ import {
   useToken,
 } from "react-bootstrap-typeahead";
 
-const NextNavbar = ({ user, logout, categories }) => {
-  const [current_category, setCurrentCategory] = useState([]);
-  const ref = createRef();
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 
-  const currentCategoryHandler = async (e) => {
+
+
+
+const NextNavbar = ({ user, logout, categories, filterByCategory, techs }) => {
+  const [current_category, setCurrentCategory] = useState([]);
+  const [current_tech, setCurrentTech] = useState([]);
+
+  const filterByCategoryHandler = async (e) => {
     e.preventDefault();
-    console.log(category_options[1]);
-    setCurrentCategory(category_options[1]);
+    await filterByCategory(current_category);
   };
 
   return (
     <>
       <Navbar
-        className={`${gstyle.global__background} ${sty.navbar} ${sty.navbar__upper_navbar}`}
+        className={`${gst.global__background} ${sty.navbar} ${sty.navbar__upper_navbar}`}
         expand="xs"
         variant="dark"
       >
@@ -48,7 +53,7 @@ const NextNavbar = ({ user, logout, categories }) => {
       </Navbar>
 
       <Navbar
-        className={`${gstyle.global__background} ${sty.navbar} ${sty.navbar__lower_navbar}`}
+        className={`${gst.global__background} ${sty.navbar} ${sty.navbar__lower_navbar}`}
         expand="md"
         variant="dark"
       >
@@ -65,13 +70,13 @@ const NextNavbar = ({ user, logout, categories }) => {
                   <Nav.Link className={`${sty.navbar__link}`} href="#action1">
                     Account
                   </Nav.Link>
-                  <Nav.Link className={`${sty.navbar__link}`} href="#action1">
+                  <Nav.Link className={`${sty.navbar__link}`} href="/logout">
                     Logout
                   </Nav.Link>
                 </>
               ) : (
                 <>
-                  <Nav.Link className={`${sty.navbar__link}`} href="#action1">
+                  <Nav.Link className={`${sty.navbar__link}`} href="/login">
                     Login
                   </Nav.Link>
                 </>
@@ -93,56 +98,42 @@ const NextNavbar = ({ user, logout, categories }) => {
                   clearButton
                 />
                 <Button
+                  onClick={(e) => {
+                    filterByCategoryHandler(e);
+                  }}
                   className={`${sty.navbar__search_cat_button}`}
                   variant="outline-success"
                 >
-                  {"->"}
+                 <FontAwesomeIcon size="1x" icon={faCheck}/>
                 </Button>
               </InputGroup>
             </Nav>
 
-            {/* <Nav>
-              <Form className={`${sty.navbar__search_tech} d-flex`}>
-                <FormControl
-                  type="search"
-                  placeholder="Search"
-                  className={`mr-2 ${sty.navbar__search_tech_search_input}`}
-                  aria-label="Search"
-                />
-                <Container
-                  className={`${sty.navbar__search_tech_button_container}`}
+            <Nav className={sty.navbar__lower_navbar__final_nav}>
+              {techs == null ? (
+                <></>
+              ) : (
+                <InputGroup
+                  size="lg"
+                  className={`${sty.navbar__cat_input_group} mb-3`}
                 >
+                  <Typeahead
+                    id="basic-typeahead-multiple"
+                    labelKey="title"
+                    onChange={setCurrentTech}
+                    options={techs}
+                    placeholder="Search a tech item..."
+                    selected={current_tech}
+                    clearButton
+                  />
                   <Button
-                    className={`${sty.navbar__search_tech_button}`}
+                    className={`${sty.navbar__search_cat_button}`}
                     variant="outline-success"
                   >
-                    Search
+                    <FontAwesomeIcon size="1x" icon={faCheck}/>
                   </Button>
-                </Container>
-              </Form>
-            </Nav> */}
-
-            <Nav className={sty.navbar__lower_navbar__final_nav}>
-              <InputGroup
-                size="lg"
-                className={`${sty.navbar__cat_input_group} mb-3`}
-              >
-                <Typeahead
-                  id="basic-typeahead-multiple"
-                  labelKey="title"
-                  onChange={setCurrentCategory}
-                  options={categories}
-                  placeholder="Search a tech item..."
-                  selected={current_category}
-                  clearButton
-                />
-                <Button
-                  className={`${sty.navbar__search_cat_button}`}
-                  variant="outline-success"
-                >
-                  {"->"}
-                </Button>
-              </InputGroup>
+                </InputGroup>
+              )}
             </Nav>
           </div>
         </Navbar.Collapse>

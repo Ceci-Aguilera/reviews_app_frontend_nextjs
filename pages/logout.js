@@ -3,17 +3,12 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useAuth } from "../context/AuthContext";
 
-export default function Login() {
-  const { auth, user, loading, login, register } = useAuth();
+export default function Logout() {
+  const { loading, logout } = useAuth();
 
-  const handleLogin = async (e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
-    await login('someEmail@gmail.com', 'SuperHellow123!');
-  };
-
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    // await register();
+    await logout();
   };
 
   return (
@@ -29,22 +24,13 @@ export default function Login() {
           <p>Loading</p>
         ) : (
           <>
-            {user == null ? <p>Null</p> : <p>Not Null</p>}
             <button
               onClick={(e) => {
-                handleRegister(e);
+                handleLogout(e);
               }}
               type="submit"
             >
-              Register
-            </button>
-            <button
-              onClick={(e) => {
-                handleLogin(e);
-              }}
-              type="submit"
-            >
-              Login
+              Logout
             </button>
           </>
         )}
