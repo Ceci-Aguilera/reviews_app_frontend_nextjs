@@ -15,7 +15,15 @@ import {
   FormLabel,
 } from "react-bootstrap";
 
+import ReactStars from "react-rating-stars-component";
+
 const TechDetailComponent = ({ tech }) => {
+  const [score, setScore] = useState(0);
+
+  const scoreHandler = async (newRating) => {
+    setScore(newRating);
+  };
+
   return tech == null ? (
     <></>
   ) : (
@@ -56,31 +64,58 @@ const TechDetailComponent = ({ tech }) => {
           </div>
         </Col>
         <Col xs={12} sm={12} md={6} md={6} className={sty.tech__form_col}>
-          
-            <div className={sty.tech__rev_header_div}>
-              <h1 className={sty.tech__rev_header}>{tech.title}</h1>
-            </div>
+          <div className={sty.tech__rev_header_div}>
+            <h1 className={sty.tech__rev_header}>{tech.title}</h1>
+          </div>
 
           <div className={sty.tech__rev_comment}>
-            <Form classNme={sty.tech__form}>
-              <InputGroup>
-                <Form.Label>Title</Form.Label>
-                <FormControl type="text" />
+            <Form className={sty.tech__form}>
+              <InputGroup
+                className={`${sty.tech__rev_input_group} ${sty.tech__rev_title}`}
+              >
+                {/* <Form.Label>Title</Form.Label> */}
+                <FormControl type="text" placeholder="Title of the review" />
               </InputGroup>
 
-              <InputGroup>
-                <Form.Label>Description</Form.Label>
-                <FormControl as="textarea" />
-              </InputGroup>
-              <Button
-              variant='success'
-              className={sty.tech__send_rev_button}
-                onClick={() => {
-                  console.log("Send review");
-                }}
+              <InputGroup
+                className={`${sty.tech__rev_input_group} ${sty.tech__rev_description}`}
               >
-                Send review
-              </Button>
+                {/* <Form.Label>Description</Form.Label> */}
+                <FormControl as="textarea" placeholder="Review & comments" />
+              </InputGroup>
+
+
+              <p className={sty.tech__rev_info_1}>
+                Rating
+              </p>
+              <InputGroup
+                className={`${sty.tech__rev_input_group} ${sty.tech__rev_score}`}
+              >
+                {/* <Form.Label>Score</Form.Label> */}
+                <ReactStars
+                  className={sty.tech__stars_component}
+                  count={5}
+                  onChange={scoreHandler}
+                  size={50}
+                  activeColor="#ffd700"
+                />
+              </InputGroup>
+
+              <p className={sty.tech__rev_info_2}>
+                Out of 5★.
+              </p>
+
+              <Container className={sty.tech__send_rev_button_div}>
+                <Button
+                  variant="success"
+                  className={sty.tech__send_rev_button}
+                  onClick={() => {
+                    console.log("Send review");
+                  }}
+                >
+                  Send review
+                </Button>
+              </Container>
             </Form>
           </div>
         </Col>
