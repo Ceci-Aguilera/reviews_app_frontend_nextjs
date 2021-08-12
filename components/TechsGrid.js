@@ -1,5 +1,6 @@
 import axios from "axios";
 import router from "next/router";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import sty from "../styles/TechsGrid.module.css";
 import gst from "../styles/NextGlobal.module.css";
@@ -21,6 +22,7 @@ const TechsGrid = ({ techs }) => {
               md={4}
               lg={3}
             >
+              <Link href={`techs/${tech.id}`}>
               <Card className={`${sty.techs_grid__card}`}>
                 <div
                   className={`${gst.global__border} ${sty.techs_grid__img_div}`}
@@ -54,6 +56,7 @@ const TechsGrid = ({ techs }) => {
                   </h1>
                 </Card.Body>
               </Card>
+              </Link>
             </Col>
           );
         })}

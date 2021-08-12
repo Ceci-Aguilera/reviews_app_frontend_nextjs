@@ -65,11 +65,12 @@
 }
 
 .navbar__search_cat_button{
-  background-color: white;
+  /* background-color: white; */
+  margin-left: 1px;
 }
 
 .navbar__search_cat_button::after{
-  background-color: white !important;
+  /* background-color: white !important; */
 }
 
 

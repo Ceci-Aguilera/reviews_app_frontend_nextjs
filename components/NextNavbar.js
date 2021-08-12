@@ -102,9 +102,9 @@ const NextNavbar = ({ user, logout, categories, filterByCategory, techs }) => {
                     filterByCategoryHandler(e);
                   }}
                   className={`${sty.navbar__search_cat_button}`}
-                  variant="outline-success"
+                  variant="success"
                 >
-                 <FontAwesomeIcon size="1x" icon={faCheck}/>
+                Search <FontAwesomeIcon size="1x" icon={faCheck}/>
                 </Button>
               </InputGroup>
             </Nav>
@@ -128,9 +128,9 @@ const NextNavbar = ({ user, logout, categories, filterByCategory, techs }) => {
                   />
                   <Button
                     className={`${sty.navbar__search_cat_button}`}
-                    variant="outline-success"
+                    variant="success"
                   >
-                    <FontAwesomeIcon size="1x" icon={faCheck}/>
+                    Search <FontAwesomeIcon size="1x" icon={faCheck}/>
                   </Button>
                 </InputGroup>
               )}
