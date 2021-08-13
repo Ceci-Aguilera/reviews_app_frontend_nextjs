@@ -1,0 +1,17 @@
+.footer {
+  margin-top: 100px;
+  min-height: 200px !important;
+}
+
+.footer__div {
+  color: white !important;
+  font-size: 20px;
+  text-align: center;
+  vertical-align: middle;
+  align-items:center;
+  justify-content:center;
+}
+
+.footer__p{
+    padding-top: 80px !important;
+}

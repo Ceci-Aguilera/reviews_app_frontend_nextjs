@@ -1,29 +1,107 @@
-.rev__card{
-    margin-top: 50px;
-    margin-bottom: 50px;
-    max-width: 800px;
+.tech__img_div{
+  margin-top: 20px;
+  text-align: center;
+  max-height: 400px;
+  max-width: 400px;
+  min-height: 200px;
+  min-width: 200px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.rev__card {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  max-width: 800px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  font-weight: 300;
+}
+
+.rev__card_header {
+  background-color: #9fed9a;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+}
+
+.rev__card_footer {
+  background-color: white !important;
+}
+
+.rev__star_span {
+  color: #fc0;
+}
+
+.rev__user_span {
+  color: #60646e;
+  font-weight: bold;
+}
+
+.rev__pagination_div {
+  text-align: center;
+}
+
+.rev__page_number_div {
+  /* display: inline-block !important; */
+}
+
+.rev__prev_button,
+.rev__next_button {
+  /* display: inline-block !important; */
+  min-width: 100px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+.rev__page_number_div {
+  /* position: relative; */
+  /* display: inline-block !important; */
+  /* width: 0;
+  height: 0;
+  vertical-align: top; */
+}
+
+.rev__page_number_dummy_div {
+  /* display: inline-block !important; */
+  /* position: absolute;
+  width: max-content; */
+  padding: 10px;
+  font-size: 18px;
+  margin-top: 5px;
+  margin-bottom: 50px;
+}
+
+.rev__page_number_p {
+  color: #60646e;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 758px) {
+
+  .tech__img_div{
+    margin-top: 20px;
+    text-align: center;
+    max-height: 280px;
+    max-width: 280px;
+    min-height: 200px;
+    min-width: 200px;
     margin-left: auto !important;
     margin-right: auto !important;
-    font-weight: 300;
-}
+  }
 
-.rev__card_header{
-    background-color: #9fed9a;
-    color: white;
-    font-weight: bold;
-    font-size: 24px;
-    text-align: center;
-}
+  /* .rev__page_number_div {
+        position: absolute;
+        display: block;
+      }
 
-.rev__card_footer{
-    background-color: white !important;
-}
-
-.rev__star_span{
-    color: #fc0;
-}
-
-.rev__user_span{
-    color: #60646e;
-    font-weight: bold;
+      .rev__page_number_div, .rev__page_number_dummy_div{
+          text-align: center !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          margin-top: 5px;
+      } */
 }

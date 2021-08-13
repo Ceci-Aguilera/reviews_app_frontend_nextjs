@@ -8,6 +8,7 @@ import NextNavbar from "../components/NextNavbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import TechsGrid from "../components/TechsGrid";
+import NextFooter from "../components/NextFooter";
 
 const config = {
   headers: {
@@ -98,9 +99,7 @@ export default function Home() {
         )}
       </main>
 
-      <footer className={styles.footer}>
-        <p>This is the footer</p>
-      </footer>
+      <NextFooter />
     </div>
   );
 }

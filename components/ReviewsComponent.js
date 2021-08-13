@@ -23,11 +23,13 @@ const ReviewsComponent = ({ tech, reviews }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [revNumber] = useState(3);
   const [paginatedRevs, setPaginatedRevs] = useState([]);
+  const [maxAmountOfPages, setMaxAmountOfPages] = useState(1)
 
   useEffect(async () => {
     const currentPageNumber = pageNumber * revNumber - revNumber;
     const temp_reviews = [...reviews];
     setPaginatedRevs(temp_reviews.slice(currentPageNumber, revNumber));
+    setMaxAmountOfPages(Math.ceil(reviews.length/revNumber))
   }, []);
 
   const handlePrev = () => {
@@ -63,6 +65,12 @@ const ReviewsComponent = ({ tech, reviews }) => {
     <>No reviews</>
   ) : (
     <Container className={sty.tech__div}>
+
+      <div className={sty.tech__img_div}>
+        <img className={sty.tech__img_div} src={tech.image_url} />
+
+      </div>
+
       {paginatedRevs.map((rev, index) => {
         return (
           <Card key={index} className={sty.rev__card}>
@@ -81,9 +89,28 @@ const ReviewsComponent = ({ tech, reviews }) => {
         );
       })}
 
-      <div>
-        <button onClick={() => handlePrev()}>prev</button>
-        <button onClick={() => handleNext()}>next</button>
+      <div className={sty.rev__pagination_div}>
+        <div className={sty.rev__buttons_div}>
+          <Button
+            variant="success"
+            className={sty.rev__prev_button}
+            onClick={() => handlePrev()}
+          >
+            {"<- "} Prev
+          </Button>
+          <Button
+            variant="success"
+            className={sty.rev__next_button}
+            onClick={() => handleNext()}
+          >
+            Next {" ->"}
+          </Button>
+        </div>
+        <div className={sty.rev__page_number_div}>
+          <div className={sty.rev__page_number_dummy_div}>
+            <p className={sty.rev__page_number_p}>Page {pageNumber} of {maxAmountOfPages}</p>
+          </div>
+        </div>
       </div>
     </Container>
   );

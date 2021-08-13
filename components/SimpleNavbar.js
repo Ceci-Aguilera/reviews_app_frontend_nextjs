@@ -15,7 +15,7 @@ const SimpleNavbar = ({ user, logout }) => {
         // bg="dark"
         variant="dark"
         className={`${gst.global__background} ${sty.navbar}`}
-        expand="md"
+        expand="lg"
       >
         <Container>
           <Navbar.Brand className={`${sty.navbar__brand}`} href="/">

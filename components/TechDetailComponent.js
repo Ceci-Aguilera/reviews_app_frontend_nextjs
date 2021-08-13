@@ -50,7 +50,7 @@ const TechDetailComponent = ({ tech, sendReview, reviews }) => {
     <></>
   ) : (
     <Container className={sty.tech__div}>
-      <Row className={sty.tech__row}>
+      <Row className={sty.tech__row} >
         <Col xs={12} sm={12} md={6} md={6} className={sty.tech__img_col}>
           <div className={sty.tech__img_div}>
             <img src={tech.image_url} className={sty.tech__image} />

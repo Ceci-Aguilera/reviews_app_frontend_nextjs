@@ -49,9 +49,7 @@ export const getStaticProps = async (ctx) => {
 
 export default function ReviewsDetail({ tech, reviews }) {
   const { user, loading } = useAuth();
-  const router = useRouter();
 
-  console.log(reviews)
   return tech == undefined || reviews === undefined ? (
     <></>
   ) : (
