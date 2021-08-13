@@ -85,10 +85,12 @@ const TechDetailComponent = ({ tech, sendReview, reviews }) => {
                 <div key={index} className={sty.tech__all_reviews_div}>
                   <div className={sty.tech__card_header}>
                     {rev.title} <span className={sty.boldLightSpan}>by </span>
-                    {"   "}<span className={sty.boldSpan}>{rev.username}</span>{" "}
+                    {"   "}
+                    <span className={sty.boldSpan}>{rev.username}</span>{" "}
                   </div>
                   <div className={sty.tech__card_body}>
-                    <span className={sty.colorSpan}>{rev.score}/5.0★</span> {truncateStr(rev.description)}
+                    <span className={sty.colorSpan}>{rev.score}/5.0★</span>{" "}
+                    {truncateStr(rev.description)}
                   </div>
                 </div>
               );
@@ -96,7 +98,13 @@ const TechDetailComponent = ({ tech, sendReview, reviews }) => {
           </div>
 
           <div className={sty.tech__reviews_button_div}>
-            <Button variant="primary" className={sty.tech__reviews_button}>
+            <Button
+              variant="primary"
+              className={sty.tech__reviews_button}
+              onClick={() =>
+                router.push(`/techs/reviews/${tech.id}`)
+              }
+            >
               See reviews in detail
             </Button>
           </div>

@@ -1,12 +1,8 @@
-.tech__div{
-  /* background-color: seagreen; */
-}
-
 .tech__img_div {
   margin-left: auto !important;
   margin-right: auto !important;
   text-align: center;
-  margin-top: 70px;
+  margin-top: 30px;
 }
 
 .tech__image {
@@ -20,7 +16,7 @@
   margin-left: auto !important;
   margin-right: auto !important;
   text-align: center;
-  margin-top: 70px;
+  margin-top: 30px;
 }
 
 .tech__star_info_1,
@@ -73,7 +69,7 @@
 }
 
 .tech__send_rev_button_div{
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: auto !important;
   margin-right: auto !important;
   text-align: center;  
@@ -108,7 +104,7 @@
 }
 
 .tech__rev_title {
-  margin-top: 100px !important;
+  margin-top: 50px !important;
   width: 80%;
 }
 
@@ -132,7 +128,7 @@
   margin-right: auto !important;
   text-align:center;
   font-weight:lighter !important;
-  margin-top: 50px;
+  margin-top: 20px !important;
   margin-bottom: 0px !important;
   padding-bottom: 0px !important;
   font-size: 24px;

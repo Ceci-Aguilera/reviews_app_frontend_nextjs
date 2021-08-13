@@ -1,0 +1,29 @@
+.rev__card{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    max-width: 800px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    font-weight: 300;
+}
+
+.rev__card_header{
+    background-color: #9fed9a;
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+}
+
+.rev__card_footer{
+    background-color: white !important;
+}
+
+.rev__star_span{
+    color: #fc0;
+}
+
+.rev__user_span{
+    color: #60646e;
+    font-weight: bold;
+}

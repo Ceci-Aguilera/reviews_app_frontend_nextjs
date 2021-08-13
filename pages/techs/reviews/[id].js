@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../../styles/Home.module.css";
-import { useAuth } from "../../context/AuthContext";
-import TechDetailComponent from "../../components/TechDetailComponent";
-import SimpleNavbar from "../../components/SimpleNavbar";
+import styles from "../../../styles/Home.module.css";
+import { useAuth } from "../../../context/AuthContext";
+import ReviewsComponent from "../../../components/ReviewsComponent";
+import SimpleNavbar from "../../../components/SimpleNavbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -36,7 +36,7 @@ export const getStaticProps = async (ctx) => {
 
   const current_tech_url =
     process.env.NEXT_PUBLIC_API_DOMAIN + `api/v1/technology/${tech_id}`;
-    
+
   const response = await axios.get(current_tech_url, config);
 
   return {
@@ -47,35 +47,12 @@ export const getStaticProps = async (ctx) => {
   };
 };
 
-export default function TechDetail({ tech, reviews }) {
+export default function ReviewsDetail({ tech, reviews }) {
   const { user, loading } = useAuth();
   const router = useRouter();
 
-  const sendReview = async (title, comment, score) => {
-    const create_review_url =
-      process.env.NEXT_PUBLIC_API_DOMAIN + `api/v1/reviews/create/${tech.id}`;
-
-    const body = JSON.stringify({
-      create_review: {
-        title,
-        description: comment,
-        score,
-        user_email: user.email,
-        user_token: user.authentication_token,
-      },
-    });
-
-    axios
-      .post(create_review_url, body, config)
-      .then((response) => {
-        router.reload();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  return tech == undefined ? (
+  console.log(reviews)
+  return tech == undefined || reviews === undefined ? (
     <></>
   ) : (
     <>
@@ -84,11 +61,7 @@ export default function TechDetail({ tech, reviews }) {
       ) : (
         <>
           <SimpleNavbar />
-            <TechDetailComponent
-              tech={tech}
-              sendReview={sendReview}
-              reviews={reviews}
-            />
+          <ReviewsComponent tech={tech} reviews={reviews} />
         </>
       )}
     </>
