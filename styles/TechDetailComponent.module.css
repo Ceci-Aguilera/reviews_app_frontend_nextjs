@@ -1,13 +1,17 @@
+.tech__div{
+  /* background-color: seagreen; */
+}
+
 .tech__img_div {
   margin-left: auto !important;
   margin-right: auto !important;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 70px;
 }
 
 .tech__image {
   width: 500px;
-  height: 300px;
+  height: 200px;
   margin-left: auto !important;
   margin-right: auto !important;
 }
@@ -16,7 +20,7 @@
   margin-left: auto !important;
   margin-right: auto !important;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 70px;
 }
 
 .tech__star_info_1,
@@ -31,8 +35,17 @@
   padding-bottom: 10px !important;
 }
 
+.tech__pre_rev_div{
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-top: 20px;
+  max-height:300px;
+  overflow-y: scroll;
+  width: 90%;
+}
+
 .tech__reviews_button_div {
-  margin-top: 50px;
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -133,6 +146,48 @@
   margin-top: 0px !important;
   padding-top: 0px !important;
   font-size: 14px;
+}
+
+.tech__pre_rev_div{
+  background-color: white !important;
+}
+
+.tech__all_reviews_div{
+  min-height: 80px;
+  /* background-color:royalblue; */
+  border: 2px solid #d7d8db;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin-top: 10px;
+}
+
+.boldLightSpan{
+  font-weight: normal;
+  color: #60646e;
+}
+
+.boldSpan{
+  font-weight: normal;
+  color: #60646e;
+}
+
+.tech__card_header{
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.tech__card_body{
+  padding-left: 15px;
+  padding-right: 15px;
+  font-weight: 300;
+}
+
+.colorSpan{
+  color: #5dab57;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 758px) {

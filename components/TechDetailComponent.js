@@ -13,15 +13,37 @@ import {
   InputGroup,
   FormControl,
   FormLabel,
+  Card,
 } from "react-bootstrap";
 
 import ReactStars from "react-rating-stars-component";
+import { useAuth } from "../context/AuthContext";
 
-const TechDetailComponent = ({ tech }) => {
+const TechDetailComponent = ({ tech, sendReview, reviews }) => {
+  const { user } = useAuth();
+
   const [score, setScore] = useState(0);
+  const [title, setTitle] = useState("");
+  const [comment, setComment] = useState("");
+  const [message, setMessage] = useState("");
 
   const scoreHandler = async (newRating) => {
     setScore(newRating);
+  };
+
+  const sendReviewHandler = async () => {
+    if (
+      !title.replace(/\s/g, "").length ||
+      !comment.replace(/\s/g, "").length
+    ) {
+      setMessage("Cannot leave any step blank");
+    } else if (score == 0) {
+      setMessage("Cannot leave review without any rank");
+    } else if (user == null) {
+      setMessage("You need to login before trying to send a review");
+    } else {
+      await sendReview(title, comment, score);
+    }
   };
 
   return tech == null ? (
@@ -53,16 +75,34 @@ const TechDetailComponent = ({ tech }) => {
             <p className={sty.tech__star_info_1}>From {tech.amount} reviews.</p>
 
             <p className={sty.tech__star_info_2}>
-              Scored {tech.score} of 5.0★.
+              Scored {tech.score.toFixed(1)} of 5.0★.
             </p>
+          </div>
+
+          <div className={sty.tech__pre_rev_div}>
+            {reviews.map((rev, index) => {
+              return (
+                <div key={index} className={sty.tech__all_reviews_div}>
+                  <div className={sty.tech__card_header}>
+                    {rev.title} <span className={sty.boldLightSpan}>by </span>
+                    {"   "}<span className={sty.boldSpan}>{rev.username}</span>{" "}
+                  </div>
+                  <div className={sty.tech__card_body}>
+                    <span className={sty.colorSpan}>{rev.score}/5.0★</span> {truncateStr(rev.description)}
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           <div className={sty.tech__reviews_button_div}>
             <Button variant="primary" className={sty.tech__reviews_button}>
-              See reviews
+              See reviews in detail
             </Button>
           </div>
         </Col>
+
+        {/* NOTE Other Col */}
         <Col xs={12} sm={12} md={6} md={6} className={sty.tech__form_col}>
           <div className={sty.tech__rev_header_div}>
             <h1 className={sty.tech__rev_header}>{tech.title}</h1>
@@ -74,20 +114,27 @@ const TechDetailComponent = ({ tech }) => {
                 className={`${sty.tech__rev_input_group} ${sty.tech__rev_title}`}
               >
                 {/* <Form.Label>Title</Form.Label> */}
-                <FormControl type="text" placeholder="Title of the review" />
+                <FormControl
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Title of the review"
+                />
               </InputGroup>
 
               <InputGroup
                 className={`${sty.tech__rev_input_group} ${sty.tech__rev_description}`}
               >
                 {/* <Form.Label>Description</Form.Label> */}
-                <FormControl as="textarea" placeholder="Review & comments" />
+                <FormControl
+                  as="textarea"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  placeholder="Review & comments"
+                />
               </InputGroup>
 
-
-              <p className={sty.tech__rev_info_1}>
-                Rating
-              </p>
+              <p className={sty.tech__rev_info_1}>Rating</p>
               <InputGroup
                 className={`${sty.tech__rev_input_group} ${sty.tech__rev_score}`}
               >
@@ -101,16 +148,14 @@ const TechDetailComponent = ({ tech }) => {
                 />
               </InputGroup>
 
-              <p className={sty.tech__rev_info_2}>
-                Out of 5★.
-              </p>
+              <p className={sty.tech__rev_info_2}>Out of 5★.</p>
 
               <Container className={sty.tech__send_rev_button_div}>
                 <Button
                   variant="success"
                   className={sty.tech__send_rev_button}
                   onClick={() => {
-                    console.log("Send review");
+                    sendReviewHandler();
                   }}
                 >
                   Send review
@@ -128,6 +173,10 @@ const ScoreCalc = (tech) => {
   if (tech.score) {
     return String(tech.score * 20);
   } else return "0";
+};
+
+const truncateStr = (str) => {
+  return str.length > 25 ? str.substring(0, 25) + "..." : str;
 };
 
 export default TechDetailComponent;
